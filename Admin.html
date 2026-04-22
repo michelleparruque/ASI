@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Pagina de Admin</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
         <style>
             
             body{
@@ -28,6 +29,9 @@
                 font-size: 30px;
                 font-family:cursive;
             }
+            b{
+                color: #000000;
+            }
             h2{
                 font:bolder;
                 padding-left:20px;
@@ -48,6 +52,10 @@
                 margin-top: 6px;
                 margin-left: 1px;
             }
+            p{
+                margin-left: 20px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
 
             h3{
                 color:plum;
@@ -56,7 +64,7 @@
             .cardAdd{
                 background:white;
                 padding:20px;
-                width: 300px;
+                width: 400px;
                 margin-top: 15px;
                 border-radius:10px;
                 box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
@@ -65,25 +73,38 @@
             .cardRemover{
                 background:white;
                 padding:20px;
-                width: 300px;
+                width: 400px;
                 margin-top: 15px;
                 border-radius:10px;
                 box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
                 border-left: 4px solid plum;
             }
             input, textarea {
-                width: 200px;;
+                width: 350px;;
                 padding:8px;
                 margin-top:5px;
+                background-color: white;
+                outline: none;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+                border: 1.5px solid #d0d0dc;
+                border-radius: 10px;
+                height: 25px;
+            }
+            input::placeholder, textarea::placeholder {
+                color: #a0a0b8;
+                font-size: 0.85rem;
             }
             button{
-                background-color: rgb(184, 184, 184);
+                background-color: rgb(84, 83, 83);
                 margin-top:10px;
                 position:center;
                 color:white;
                 border-radius: 10px;
                 border-color: white;
                 padding: 5px;
+                width:100px;
+                height:35px;
+                margin-left: -3px;
             }
             main {
                 display: flex;
@@ -99,10 +120,9 @@
             }
 
             .cardLista {
-                width: 400px;
                 background:white;
                 padding:20px;
-                width: 300px;
+                width: 600px;
                 margin-top: 15px;
                 border-radius:10px;
                 box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
@@ -116,14 +136,14 @@
     <body>
         <header>
             
-            <div id="logo"><b>Shop-E   </b><span class="header-badge" style="text-decoration: none;
+            <div id="logo"><i class="fa-solid fa-store"></i><b> Shop-E   </b><span class="header-badge" style="text-decoration: none;
                 font-size: 0.85rem;
                 font-weight: 600;
                 font-family: 'Times New Roman', Times, serif;
                 color: plum;
                 border: 1.5px solid plum;
                 padding: 5px 14px;
-                border-radius: 20px;">Admin</span></div>
+                border-radius: 20px;"><i class="fa-solid fa-screwdriver-wrench"></i> Admin</span></div>
 
  <!--Navegacao para a pagina do cliente-->               
             <a href="cliente.html" style="
@@ -133,18 +153,20 @@
                 color: plum;
                 border: 1.5px solid plum;
                 padding: 5px 14px;
-                border-radius: 20px;
-            ">Ver Loja</a>
+                border-radius: 20px;" >
+                <i class="fa-solid fa-bag-shopping"></i>  Ver Loja
+            </a>
         </header>
 
 
         <h2>Gestão de Produtos</h2>
+        <p>Bem vindo(a) à página de Administrador!</p>
         <main>
             
             <div class="colunaEsquerda">
 <!-- Adicionar -->
                 <div class="cardAdd">
-                    <h3>Adicionar produtos</h3>
+                    <h3><i class="fa-solid fa-plus"></i> Adicionar produtos</h3>
                     <label>Nome</label><br>
                     <input type="text" id="nomeProduto" name="Nome"><br><br>
 
@@ -159,7 +181,7 @@
 
  <!-- Remover -->       
                 <div class="cardRemover">
-                    <h3>Remover produto</h3>
+                    <h3><i class="fa-solid fa-trash"></i> Remover produto</h3>
                     <label>Nome</label><br>
                     <input type="text" id="nomeRemover" name="NomeRemover"><br> 
                     <button type="button" id="btnRem">Remover</button>
@@ -168,7 +190,7 @@
 
 <!-- Lista -->
              <div class="cardLista">
-                <h3>Produtos Disponíveis</h3>
+                <h3><i class="fa-solid fa-list"></i> Produtos Disponíveis</h3>
                 <div class="countProd">Total: <span id="totalProdutos">0</span> produto(s)</div>
                 <div class="product-table" id="listaProdutos">
                     <div class="empty-state">
