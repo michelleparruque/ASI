@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Produtos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #f5f4f8;
+      --surface:  #ffffff;
+      --surface2: #ede9f5;
+      --accent:   #7b3fa0;
+      --accent2:  #5e2d7a;
+      --lavender: #b39ddb;
+      --text:     #1a1a1a;
+      --muted:    #6b6b6b;
+      --border:   #d8d0e8;
+      --danger:   #c0392b;
+      --radius:   12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      background: var(--accent);
+      border-bottom: 2px solid var(--border);
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      color: #fff;
+    }
+    header span {
+      font-size: 0.8rem;
+      color: var(--lavender);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    main { padding: 2rem 2.5rem; max-width: 750px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 12px rgba(123,63,160,0.07);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 0.75rem;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 0.65rem 0.9rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(123,63,160,0.12);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem 1.2rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    .product-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .product-item {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 1px 6px rgba(123,63,160,0.05);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .product-item:hover { border-color: var(--lavender); box-shadow: 0 4px 16px rgba(123,63,160,0.1); }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-icon {
+      width: 42px; height: 42px;
+      background: var(--surface2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .product-info { flex: 1; }
+    .product-info .name { font-weight: 600; font-size: 0.97rem; }
+    .product-info .price { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-top: 2px; }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid transparent;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .btn-danger:hover { background: rgba(192,57,43,0.1); }
+
+    .empty-msg {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Shop-E</h1>
+  <span>Lista de Produtos</span>
+</header>
+
+<main>
+  <p class="section-title">Adicionar Produto</p>
+  <div class="form-card">
+    <div class="form-row">
+      <div class="field">
+        <label>Nome do produto</label>
+        <input type="text" id="inputNome" placeholder="Ex: Arroz 5kg" />
+      </div>
+      <div class="field">
+        <label>Preço (MZN)</label>
+        <input type="number" id="inputPreco" placeholder="Ex: 250" min="0" step="0.01" />
+      </div>
+      <button class="btn-primary" onclick="Controller.adicionarProduto()">+ Adicionar</button>
+    </div>
+  </div>
+  <p class="section-title">Lista de Produtos</p>
+  <div class="product-grid" id="listaProdutos">
+    <div class="empty-msg">Nenhum produto adicionado ainda.</div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+  const Model = {
+    produtos: [],
+
+    adicionarProduto(nome, preco) {
+      const produto = { id: Date.now(), nome, preco: parseFloat(preco) };
+      this.produtos.push(produto);
+      return produto;
+    },
+
+    removerProduto(id) {
+      this.produtos = this.produtos.filter(p => p.id !== id);
+    }
+  };
+
+  const View = {
+    renderizarProdutos(produtos) {
+      const lista = document.getElementById('listaProdutos');
+      if (produtos.length === 0) {
+        lista.innerHTML = '<div class="empty-msg">Nenhum produto adicionado ainda.</div>';
+        return;
+      }
+      lista.innerHTML = produtos.map(p => `
+        <div class="product-item">
+          <div class="product-icon">📦</div>
+          <div class="product-info">
+            <div class="name">${p.nome}</div>
+            <div class="price">${p.preco.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MZN</div>
+          </div>
+          <button class="btn-danger" onclick="Controller.removerProduto(${p.id})">✕ Remover</button>
+        </div>
+      `).join('');
+    },
+
+    limparFormulario() {
+      document.getElementById('inputNome').value = '';
+      document.getElementById('inputPreco').value = '';
+      document.getElementById('inputNome').focus();
+    },
+
+    toast(msg, cor = '#7b3fa0') {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.background = cor;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2500);
+    }
+  };
+
+  
+  const Controller = {
+    adicionarProduto() {
+      const nome  = document.getElementById('inputNome').value.trim();
+      const preco = document.getElementById('inputPreco').value;
+
+      if (!nome)                      { View.toast('Insira o nome do produto.', '#c0392b'); return; }
+      if (!preco || parseFloat(preco) < 0) { View.toast('Insira um preço válido.', '#c0392b'); return; }
+
+      Model.adicionarProduto(nome, preco);
+      View.limparFormulario();
+      View.renderizarProdutos(Model.produtos);
+      View.toast(`"${nome}" adicionado à lista!`);
+    },
+
+    removerProduto(id) {
+      Model.removerProduto(id);
+      View.renderizarProdutos(Model.produtos);
+    }
+  };
+
+  
+  document.getElementById('inputNome').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('inputPreco').focus();
+  });
+  document.getElementById('inputPreco').addEventListener('keydown', e => {
+    if (e.key === 'Enter') Controller.adicionarProduto();
+  });
+</script>
+</body>
+</html>
