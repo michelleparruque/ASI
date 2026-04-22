@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Pagina de Admin</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <style>
+            
+            body{
+                background-color: lavender;
+            }
+            header{
+                background-color: white;
+                border-bottom: 1px solid var(--gray-1);
+                padding: 5px; 
+                padding-left: 20px;
+                padding-right: 20px;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 6px 16px rgba(160, 100, 300, 0.12);
+            }
+            #logo{
+                font:icon;
+                color: plum;
+                font-size: 30px;
+                font-family:cursive;
+            }
+            b{
+                color: #000000;
+            }
+            h2{
+                font:bolder;
+                padding-left:20px;
+                padding-left: 20px;
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: #5a5a5e;
+                letter-spacing: 0.02em;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            h2::after {
+                content: '';
+                display: block;
+                width: 265px;
+                height: 3px;
+                background: plum;
+                border-radius: 10px;
+                margin-top: 6px;
+                margin-left: 1px;
+            }
+            p{
+                margin-left: 20px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            h3{
+                color:plum;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .cardAdd{
+                background:white;
+                padding:20px;
+                width: 400px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+            .cardRemover{
+                background:white;
+                padding:20px;
+                width: 400px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+            input, textarea {
+                width: 350px;;
+                padding:8px;
+                margin-top:5px;
+                background-color: white;
+                outline: none;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+                border: 1.5px solid #d0d0dc;
+                border-radius: 10px;
+                height: 25px;
+            }
+            input::placeholder, textarea::placeholder {
+                color: #a0a0b8;
+                font-size: 0.85rem;
+            }
+            button{
+                background-color: rgb(84, 83, 83);
+                margin-top:10px;
+                position:center;
+                color:white;
+                border-radius: 10px;
+                border-color: white;
+                padding: 5px;
+                width:100px;
+                height:35px;
+                margin-left: -3px;
+            }
+            main {
+                display: flex;
+                gap: 20px;
+                padding: 20px;
+                align-items: flex-start;
+            }
+
+            .colunaEsquerda {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cardLista {
+                background:white;
+                padding:20px;
+                width: 600px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+
+
+        </style>
+            
+    </head>
+    <body>
+        <header>
+            
+            <div id="logo"><i class="fa-solid fa-store"></i><b> Shop-E   </b><span class="header-badge" style="text-decoration: none;
+                font-size: 0.85rem;
+                font-weight: 600;
+                font-family: 'Times New Roman', Times, serif;
+                color: plum;
+                border: 1.5px solid plum;
+                padding: 5px 14px;
+                border-radius: 20px;"><i class="fa-solid fa-screwdriver-wrench"></i> Admin</span></div>
+
+ <!--Navegacao para a pagina do cliente-->               
+            <a href="cliente.html" style="
+                text-decoration: none;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: plum;
+                border: 1.5px solid plum;
+                padding: 5px 14px;
+                border-radius: 20px;" >
+                <i class="fa-solid fa-bag-shopping"></i>  Ver Loja
+            </a>
+        </header>
+
+
+        <h2>Gestão de Produtos</h2>
+        <p>Bem vindo(a) à página de Administrador!</p>
+        <main>
+            
+            <div class="colunaEsquerda">
+<!-- Adicionar -->
+                <div class="cardAdd">
+                    <h3><i class="fa-solid fa-plus"></i> Adicionar produtos</h3>
+                    <label>Nome</label><br>
+                    <input type="text" id="nomeProduto" name="Nome"><br><br>
+
+                    <label>Preço (MT)</label><br>
+                    <input type="number" id="precoProduto" name="Preco"><br>
+
+                    <button type="button" id="btnAdd">+ Adicionar</button>
+                
+
+                </div>
+            
+
+ <!-- Remover -->       
+                <div class="cardRemover">
+                    <h3><i class="fa-solid fa-trash"></i> Remover produto</h3>
+                    <label>Nome</label><br>
+                    <input type="text" id="nomeRemover" name="NomeRemover"><br> 
+                    <button type="button" id="btnRem">Remover</button>
+                </div>
+            </div>
+
+<!-- Lista -->
+             <div class="cardLista">
+                <h3><i class="fa-solid fa-list"></i> Produtos Disponíveis</h3>
+                <div class="countProd">Total: <span id="totalProdutos">0</span> produto(s)</div>
+                <div class="product-table" id="listaProdutos">
+                    <div class="empty-state">
+                    Nenhum produto registado.
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </main>
+
+
+<!--JS-->
+        <script>
+
+//Model
+            const Model=(() => {
+                const KEY='shopcart_produtos';
+
+                function load(){
+                    return JSON.parse(localStorage.getItem(KEY)||'[]');
+                }
+                function save(produtos){
+                    localStorage.setItem(KEY, JSON.stringify(produtos))
+                }
+                return{
+                    getAll(){
+                        return load();
+                    },
+
+                    add(nome,preco){
+                        const produtos=load();
+                        const produto={id: Date.now(), nome, preco};
+                        produtos.push(produto);
+                        save(produtos);
+                        return produto;
+                    },
+
+                    remove(nome){
+                        const produtos=load().filter(p=>
+                            p.nome.toLowerCase() !==nome.toLowerCase()
+                        );
+                        save(produtos);
+                    },
+
+                    getCount(){
+                        return load().length;
+                    }
+                };
+
+
+            })();
+
+
+//View
+            const View=(()=>{
+                const inputNomeProduto=document.getElementById('nomeProduto');
+                const inputPreco=document.getElementById('precoProduto');
+                const inputNomeRemover=document.getElementById('nomeRemover');
+                const btnAdd=document.getElementById('btnAdd');
+                const btnRem=document.getElementById('btnRem');
+                const listaProdutos=document.getElementById('listaProdutos');
+                const countSpan=document.getElementById('totalProdutos');
+
+                return{
+                    getNomeProduto(){return inputNomeProduto.value.trim();},
+                    getPreco(){return parseFloat(inputPreco.value);},
+                    getNomeRemover(){return inputNomeRemover.value.trim();},
+
+                    clearFormAdd(){
+                        inputNomeProduto.value='';
+                        inputPreco.value='';
+                        inputNomeProduto.focus();
+                    },
+
+                    clearFormRemove(){
+                        inputNomeRemover.value='';
+                        inputNomeRemover.focus();
+                    },
+
+                    renderProdutos(produtos){
+                        countSpan.textContent=produtos.length;
+
+                        if(produtos.length===0){
+                            listaProdutos.innerHTML='<div class="empty-state">Nenhum produto registado.</div>';
+                            return;
+                        }
+
+                        listaProdutos.innerHTML=produtos.map(p =>`
+                            <div style="
+                                background: lavender;
+                                border-radius: 8px;
+                                padding: 8px 12px;
+                                margin-top: 8px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            ">
+                                <span><strong>${p.nome}</strong></span>
+                                <span style="color: plum; font-weight: bold;">
+                                    MT ${p.preco.toFixed(2).replace('.', ',')}
+                                </span>
+                            </div>
+
+                        `).join('');
+                    },
+
+                    showMessage(msg, tipo='sucesso'){
+                        const cor=tipo==='erro'?'#d94f4f':'#4a9d7a';
+                        const div=document.createElement('div');
+                        div.textContent = msg;
+                        div.style.cssText = `
+                            position: fixed; top: 80px; left:40%;
+                            background: ${cor}; color: white;
+                            padding: 10px 18px; border-radius: 8px;
+                            font-size: 0.88rem; font-weight: 600;
+                            z-index: 999; opacity: 1;
+                            transition: opacity 0.4s ease;
+                        `;
+                        document.body.appendChild(div);
+                        setTimeout(() => {
+                            div.style.opacity = '0';
+                            setTimeout(() => div.remove(), 400);
+                        }, 2500);
+                    },
+                    bindAdicionar(fn) { btnAdd.addEventListener('click', fn); },
+                    bindRemover(fn)   { btnRem.addEventListener('click', fn); }
+
+                };
+
+            })();
+
+//Controller
+
+            const Controller=(()=>{
+               function refresh(){
+                    View.renderProdutos(Model.getAll());
+               } 
+               function handleAdicionar(){
+                    const nome=View.getNomeProduto();
+                    const preco=View.getPreco();
+
+                    if (!nome)                      return View.showMessage('Insira o nome do produto.', 'erro');
+                    if (isNaN(preco) || preco <= 0) return View.showMessage('Insira um valor válido.', 'erro');
+
+                    Model.add(nome, preco);
+                    View.clearFormAdd();
+                    View.showMessage(`"${nome}" adicionado com sucesso!`);
+                    refresh();
+                }
+                function handleRemover() {
+                    const nome = View.getNomeRemover();
+
+                    if (!nome) return View.showMessage('Escreva o nome do produto a remover.', 'erro');
+
+                    const existe = Model.getAll().find(p =>
+                        p.nome.toLowerCase() === nome.toLowerCase()
+                    );
+
+                    if (!existe) return View.showMessage(`"${nome}" não encontrado.`, 'erro');
+
+                    Model.remove(nome);
+                    View.clearFormRemove();
+                    View.showMessage(`"${nome}" removido!`, 'erro');
+                    refresh();
+                }
+               
+                function init(){
+                    View.bindAdicionar(handleAdicionar);
+                    View.bindRemover(handleRemover);
+                    refresh();
+        
+                }
+
+                return{init};
+
+
+
+            })();
+
+            Controller.init();
+
+        </script>
+        
+
+            
+    </body>
+
+</html>
