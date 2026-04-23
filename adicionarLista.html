@@ -203,11 +203,11 @@
 
 <header>
   <h1>Shop-E</h1>
-  <span>Lista de Produtos</span>
+  <span>Lista de Produtos na carrinha</span>
 </header>
 
 <main>
-  <p class="section-title">Adicionar Produto</p>
+  <p class="section-title">Adicionar Produto a carrinha</p>
   <div class="form-card">
     <div class="form-row">
       <div class="field">
@@ -221,9 +221,9 @@
       <button class="btn-primary" onclick="Controller.adicionarProduto()">+ Adicionar</button>
     </div>
   </div>
-  <p class="section-title">Lista de Produtos</p>
+  <p class="section-title">Lista de Produtos na carrinha</p>
   <div class="product-grid" id="listaProdutos">
-    <div class="empty-msg">Nenhum produto adicionado ainda.</div>
+    <div class="empty-msg">Nenhum produto adicionado a carrinha ainda.</div>
   </div>
 </main>
 
@@ -290,7 +290,7 @@
       Model.adicionarProduto(nome, preco);
       View.limparFormulario();
       View.renderizarProdutos(Model.produtos);
-      View.toast(`"${nome}" adicionado à lista!`);
+      View.toast(`"${nome}" adicionado à carrinha!`);
     },
 
     removerProduto(id) {
