@@ -164,7 +164,7 @@
             })();
 
             Controller.init();
-            document.getElementById("Voltar").addEventListener("click", function () {window.location.href = "index.html";});
+            
 
        
 
