@@ -117,3 +117,4 @@ const Controller = (() => {
 })();
 
 Controller.init();
+document.getElementById("Voltar").addEventListener("click", function () {window.location.href = "Admin.html";});
