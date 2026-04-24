@@ -1,156 +1,119 @@
-//  MODEL
-let listaProdutos = [];
-let carrinho = [];
+const Model = (() => {
+    const KEY = 'shopcart_produtos';
 
-function adicionarProduto(nome, preco) {
-  let produto = {
-    id: listaProdutos.length + 1,
-    nome: nome,
-    preco: preco
-  };
-  listaProdutos.push(produto);
-}
-
-function adicionarAoCarrinho(id) {
-  let produto = null;
-  for (let i = 0; i < listaProdutos.length; i++) {
-    if (listaProdutos[i].id === id) {
-      produto = listaProdutos[i];
+    function loadProdutos() {
+        return JSON.parse(localStorage.getItem(KEY) || '[]');
     }
-  }
-  if (produto !== null) {
-    carrinho.push(produto);
-  }
-}
 
-function calcularTotalQuantidade() {
-  return carrinho.length;
-}
+    return {
+        getProdutos() {
+            return loadProdutos();
+        }
+    };
+})();
 
-function calcularTotalPreco() {
-  let total = 0;
-  for (let i = 0; i < carrinho.length; i++) {
-    total = total + carrinho[i].preco;
-  }
-  return total;
-}
+const Carrinho = (() => {
+    let itens = [];
 
-function encerrarCompra() {
-  carrinho = [];
-}
+    return {
+        adicionar(produto) {
+            itens.push(produto);
+        },
 
-//VIEW
-function visualizarListaProdutos() {
-  let lista = document.getElementById("lista-produtos");
-  lista.innerHTML = "";
+        getItens() {
+            return itens;
+        },
 
-  if (listaProdutos.length === 0) {
-    let li = document.createElement("li");
-    li.textContent = "Nenhum produto adicionado ainda.";
-    li.className = "vazio";
-    lista.appendChild(li);
-    return;
-  }
+        getTotal() {
+            return itens.reduce((total, p) => total + p.preco, 0);
+        },
 
-  for (let i = 0; i < listaProdutos.length; i++) {
-    let produto = listaProdutos[i];
+        getQuantidade() {
+            return itens.length;
+        },
 
-    let li = document.createElement("li");
+        limpar() {
+            itens = [];
+        }
+    };
+})();
 
-    let span = document.createElement("span");
-    span.textContent = produto.nome + " — " + produto.preco + " MT";
+// VIEW
+const View = (() => {
+    const listaProdutos = document.getElementById('lista-produtos');
+    const listaCarrinho = document.getElementById('lista-carrinho');
+    const totalItens = document.getElementById('totalItens');
+    const totalPreco = document.getElementById('totalPreco');
 
-    let btn = document.createElement("button");
-    btn.textContent = "Adicionar ao Carrinho";
-    btn.setAttribute("data-id", produto.id);
-    btn.addEventListener("click", function() {
-      controladorAdicionarAoCarrinho(produto.id);
-    });
+    return {
+        renderProdutos(produtos) {
+            if (produtos.length === 0) {
+                listaProdutos.innerHTML = '<li>Nenhum produto disponível</li>';
+                return;
+            }
 
-    li.appendChild(span);
-    li.appendChild(btn);
-    lista.appendChild(li);
-  }
-}
+            listaProdutos.innerHTML = produtos.map(p => `
+                <li>
+                    ${p.nome} - ${p.preco} MZN
+                    <button onclick="Controller.adicionarAoCarrinho(${p.id})">
+                        Adicionar
+                    </button>
+                </li>
+            `).join('');
+        },
 
-function visualizarCarrinho() {
-  let lista = document.getElementById("lista-carrinho");
-  lista.innerHTML = "";
+        renderCarrinho(itens) {
+            listaCarrinho.innerHTML = itens.map(p => `
+                <li>${p.nome} - ${p.preco} MZN</li>
+            `).join('');
 
-  if (carrinho.length === 0) {
-    let li = document.createElement("li");
-    li.textContent = "O carrinho está vazio.";
-    li.className = "vazio";
-    lista.appendChild(li);
-  } else {
-    for (let i = 0; i < carrinho.length; i++) {
-      let item = carrinho[i];
+            totalItens.textContent = Carrinho.getQuantidade();
+            totalPreco.textContent = Carrinho.getTotal().toFixed(2) + ' MZN';
+        },
 
-      let li = document.createElement("li");
-      li.textContent = item.nome + " — " + item.preco + " MT";
-      lista.appendChild(li);
+        limparCarrinho() {
+            listaCarrinho.innerHTML = '';
+            totalItens.textContent = 0;
+            totalPreco.textContent = '0.00 MZN';
+        }
+    };
+})();
+
+// CONTROLLER
+const Controller = (() => {
+
+    function carregarProdutos() {
+        const produtos = Model.getProdutos();
+        View.renderProdutos(produtos);
     }
-  }
 
-  document.getElementById("total-itens").textContent = calcularTotalItens();
-  document.getElementById("total-preco").textContent = calcularTotalPreco() + " MT";
-}
+    function adicionarAoCarrinho(id) {
+        const produtos = Model.getProdutos();
+        const produto = produtos.find(p => p.id === id);
 
-function mostrarErro(mensagem) {
-  document.getElementById("erro-produto").textContent = mensagem;
-}
+        if (!produto) return;
 
-function limparErro() {
-  document.getElementById("erro-produto").textContent = "";
-}
+        Carrinho.adicionar(produto);
+        View.renderCarrinho(Carrinho.getItens());
+    }
 
-function limparFormulario() {
-  document.getElementById("input-nome").value = "";
-  document.getElementById("input-preco").value = "";
-}
+    function encerrarCompra() {
+        alert("Compra finalizada!");
+        Carrinho.limpar();
+        View.limparCarrinho();
+    }
 
+    function init() {
+        carregarProdutos();
 
+        window.Controller = {
+            adicionarAoCarrinho,
+            encerrarCompra
+        };
+    }
 
-//CONTROLLER
-function controladorAdicionarProduto() {
-  let nome = document.getElementById("input-nome").value;
-  let preco = document.getElementById("input-preco").value;
+    return { init };
 
-  if (nome === "") {
-    mostrarErro("O nome do produto não pode estar vazio.");
-    return;
-  }
-  if (preco === "" || preco <= 0) {
-    mostrarErro("Insira um preço válido.");
-    return;
-  }
+})();
 
-  limparErro();
-
-  adicionarProduto(nome, Number(preco));
-  visualizarListaProdutos();
-  limparFormulario();
-}
-
-function controladorAdicionarAoCarrinho(id) {
-  adicionarAoCarrinho(id);
-  renderizarCarrinho();
-}
-
-function controladorEncerrarCompra() {
-  encerrarCompra();
-  renderizarCarrinho();
-}
-
-let botaoAdicionarProduto = document.getElementById("botao-adicionar-produto");
-botaoAdicionarProduto.addEventListener("click", function() {
-  controladorAdicionarProduto();
-});
-
-let botaoEncerrar = document.getElementById("botao-encerrar");
-botaoEncerrar.addEventListener("click", function() {
-  controladorEncerrarCompra();
-});
-
-visualizaListaProdutos();
-vsualizarCarrinho();
+Controller.init();
