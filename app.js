@@ -108,3 +108,48 @@ function limparFormulario() {
   document.getElementById("input-nome").value = "";
   document.getElementById("input-preco").value = "";
 }
+
+//  CONTROLLER
+function controladorAdicionarProduto() {
+  let nome = document.getElementById("input-nome").value;
+  let preco = document.getElementById("input-preco").value;
+
+  if (nome === "") {
+    mostrarErro("O nome do produto não pode estar vazio.");
+    return;
+  }
+  if (preco === "" || preco <= 0) {
+    mostrarErro("Insira um preço válido.");
+    return;
+  }
+
+  limparErro();
+
+  adicionarProduto(nome, Number(preco));
+
+  visualizarListaProdutos();
+  limparFormulario();
+}
+
+function controladorAdicionarAoCarrinho(id) {
+  adicionarAoCarrinho(id);
+  visualizarCarrinho();
+}
+
+function controladorEncerrarCompra() {
+  encerrarCompra();
+  visualizarCarrinho();
+}
+
+let botaoAdicionarProduto = document.getElementById("botao-adicionar-produto");
+botaoAdicionarProduto.addEventListener("click", function() {
+  controladorAdicionarProduto();
+});
+
+let botaoEncerrar = document.getElementById("botao-encerrar");
+botaoEncerrar.addEventListener("click", function() {
+  controladorEncerrarCompra();
+});
+
+visualizarListaProdutos();
+visualizarCarrinho();
