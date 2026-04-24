@@ -39,7 +39,7 @@ function encerrarCompra() {
   carrinho = [];
 }
 
-//  VIEW
+//VIEW
 function visualizarListaProdutos() {
   let lista = document.getElementById("lista-produtos");
   lista.innerHTML = "";
@@ -60,10 +60,10 @@ function visualizarListaProdutos() {
     let span = document.createElement("span");
     span.textContent = produto.nome + " — " + produto.preco + " MT";
 
-    let botao = document.createElement("button");
-    botao.textContent = "Adicionar ao Carrinho";
-    botao.setAttribute("data-id", produto.id);
-    botao.addEventListener("click", function() {
+    let btn = document.createElement("button");
+    btn.textContent = "Adicionar ao Carrinho";
+    btn.setAttribute("data-id", produto.id);
+    btn.addEventListener("click", function() {
       controladorAdicionarAoCarrinho(produto.id);
     });
 
@@ -109,7 +109,9 @@ function limparFormulario() {
   document.getElementById("input-preco").value = "";
 }
 
-//  CONTROLLER
+
+
+//CONTROLLER
 function controladorAdicionarProduto() {
   let nome = document.getElementById("input-nome").value;
   let preco = document.getElementById("input-preco").value;
@@ -126,19 +128,18 @@ function controladorAdicionarProduto() {
   limparErro();
 
   adicionarProduto(nome, Number(preco));
-
   visualizarListaProdutos();
   limparFormulario();
 }
 
 function controladorAdicionarAoCarrinho(id) {
   adicionarAoCarrinho(id);
-  visualizarCarrinho();
+  renderizarCarrinho();
 }
 
 function controladorEncerrarCompra() {
   encerrarCompra();
-  visualizarCarrinho();
+  renderizarCarrinho();
 }
 
 let botaoAdicionarProduto = document.getElementById("botao-adicionar-produto");
@@ -151,5 +152,5 @@ botaoEncerrar.addEventListener("click", function() {
   controladorEncerrarCompra();
 });
 
-visualizarListaProdutos();
-visualizarCarrinho();
+visualizaListaProdutos();
+vsualizarCarrinho();
