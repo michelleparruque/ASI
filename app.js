@@ -63,16 +63,20 @@ const View = (() => {
         },
 
         renderCarrinho(itens) {
-            listaCarrinho.innerHTML = itens.map(p => `
-                <li>${p.nome} - ${p.preco} MZN</li>
-            `).join('');
+            if (itens.length === 0) {
+                listaCarrinho.innerHTML = '<li>Carrinho vazio</li>';
+            } else {
+                listaCarrinho.innerHTML = itens.map(p => `
+                    <li>${p.nome} - ${p.preco} MZN</li>
+                `).join('');
+            }
 
             totalItens.textContent = Carrinho.getQuantidade();
             totalPreco.textContent = Carrinho.getTotal().toFixed(2) + ' MZN';
         },
 
         limparCarrinho() {
-            listaCarrinho.innerHTML = '';
+            listaCarrinho.innerHTML = '<li>Carrinho vazio</li>';
             totalItens.textContent = 0;
             totalPreco.textContent = '0.00 MZN';
         }
@@ -98,23 +102,40 @@ const Controller = (() => {
     }
 
     function encerrarCompra() {
-        alert("Compra finalizada!");
+        if (Carrinho.getQuantidade() === 0) {
+            alert("Carrinho vazio! Adicione produtos primeiro.");
+            return;
+        }
+        alert("Compra finalizada! Total: " + Carrinho.getTotal().toFixed(2) + " MZN");
         Carrinho.limpar();
         View.limparCarrinho();
     }
 
     function init() {
         carregarProdutos();
-
-        window.Controller = {
-            adicionarAoCarrinho,
-            encerrarCompra
-        };
+        View.renderCarrinho(Carrinho.getItens());
+        
+        // Botão Voltar
+        const btnVoltar = document.getElementById("Voltar");
+        if (btnVoltar) {
+            btnVoltar.addEventListener("click", function () {
+                window.location.href = "Admin.html";
+            });
+        }
+        
+        // Botão Encerrar Compra
+        const btnEncerrar = document.getElementById("btnEncerrar");
+        if (btnEncerrar) {
+            btnEncerrar.addEventListener("click", encerrarCompra);
+        }
     }
 
-    return { init };
+    return { init, adicionarAoCarrinho, encerrarCompra };
 
 })();
 
+// EXPORTA O CONTROLLER GLOBALMENTE - Esta é a linha mais importante!
+window.Controller = Controller;
+
+// Inicia a aplicação
 Controller.init();
-document.getElementById("Voltar").addEventListener("click", function () {window.location.href = "Admin.html";});
