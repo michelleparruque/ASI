@@ -1,0 +1,124 @@
+body{
+    background-color: lavender;
+}
+header{
+                background-color: white;
+                border-bottom: 1px solid var(--gray-1);
+                padding: 5px; 
+                padding-left: 20px;
+                padding-right: 20px;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 6px 16px rgba(160, 100, 300, 0.12);
+}
+            #logo{
+                font:icon;
+                color: plum;
+                font-size: 30px;
+                font-family:cursive;
+            }
+            b{
+                color: #000000;
+            }
+            h2{
+                font:bolder;
+                padding-left:20px;
+                padding-left: 20px;
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: #5a5a5e;
+                letter-spacing: 0.02em;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            h2::after {
+                content: '';
+                display: block;
+                width: 265px;
+                height: 3px;
+                background: plum;
+                border-radius: 10px;
+                margin-top: 6px;
+                margin-left: 1px;
+            }
+            p{
+                margin-left: 20px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            h3{
+                color:plum;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .cardAdd{
+                background:white;
+                padding:20px;
+                width: 400px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+            .cardRemover{
+                background:white;
+                padding:20px;
+                width: 400px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+            input, textarea {
+                width: 350px;;
+                padding:8px;
+                margin-top:5px;
+                background-color: white;
+                outline: none;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+                border: 1.5px solid #d0d0dc;
+                border-radius: 10px;
+                height: 25px;
+            }
+            input::placeholder, textarea::placeholder {
+                color: #a0a0b8;
+                font-size: 0.85rem;
+            }
+            button{
+                background-color: rgb(84, 83, 83);
+                margin-top:10px;
+                position:center;
+                color:white;
+                border-radius: 10px;
+                border-color: white;
+                padding: 5px;
+                width:100px;
+                height:35px;
+                margin-left: -3px;
+            }
+            main {
+                display: flex;
+                gap: 20px;
+                padding: 20px;
+                align-items: flex-start;
+            }
+
+            .colunaEsquerda {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cardLista {
+                background:white;
+                padding:20px;
+                width: 600px;
+                margin-top: 15px;
+                border-radius:10px;
+                box-shadow: 0 4px 16px rgba(160, 100, 200, 0.12);
+                border-left: 4px solid plum;
+            }
+
