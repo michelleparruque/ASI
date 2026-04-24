@@ -1,5 +1,3 @@
-
-
 //Model
             const Model=(() => {
                 const KEY='shopcart_produtos';
@@ -166,6 +164,7 @@
             })();
 
             Controller.init();
+            document.getElementById("Voltar").addEventListener("click", function () {window.location.href = "index.html";});
 
        
 
