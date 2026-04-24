@@ -1,40 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt">
+<<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <title>Carrinho de compras</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Produtos no carrinho</h1>
-  <div>
-    <label>Nome:</label>
-    <input type="text" id="inputNome" placeholder="Nome do produto" />
+  <header>
+    <h1> Loja </h1>
+  </header>
 
-    <label>Preço (MZN):</label>
-    <input type="number" id="inputPreco" placeholder="Preço" min="0" />
+  <main>
 
-    <button onclick="adicionarProduto()">Adicionar</button>
-  </div>
+    <section class="card" id="secao-adicionar">
+      <h2>Adicionar Produto</h2>
+      <div class="form-grupo">
+        <label for="input-nome">Nome do Produto</label>
+        <input type="text" id="input-nome" placeholder="Ex: Camiseta">
+      </div>
+      <div class="form-grupo">
+        <label for="input-preco">Preço (MT)</label>
+        <input type="number" id="input-preco" placeholder="Ex: 500">
+      </div>
+      <p id="erro-produto" class="erro"></p>
+      <button id="botao-adicionar-produto">Adicionar Produto</button>
+    </section>
 
-  <hr />
+    <section class="card" id="secao-produtos">
+      <h2>Produtos Disponíveis</h2>
+      <ul id="lista-produtos">
+      </ul>
+    </section>
 
-  
-  <h2>Produtos Disponíveis</h2>
-  <ul id="lista-produtos"></ul>
+    <section class="card" id="secao-carrinho">
+      <h2>Carrinho de Compras</h2>
+      <ul id="lista-carrinho">
+      </ul>
+      <div id="resumo-carrinho">
+        <p>Quantidade de produtos: <strong id="total-itens">0</strong></p>
+        <p>Total a pagar: <strong id="total-preco">0 MT</strong></p>
+      </div>
+      <button id="botao-encerrar" class="botao-encerrar">Encerrar Compra</button>
+    </section>
 
-  <hr />
+  </main>
 
-  
-  <h2>Produtos Adicionados ao carrinho</h2>
-  <ul id="lista-carrinho"></ul>
-
-  <p>Total de itens: <strong id="totalItens">0</strong></p>
-  <p>Total a pagar: <strong id="totalPreco">0.00 MZN</strong></p>
-
-  <button onclick="encerrarCompra()">Encerrar Compra</button>
-
+  <script src="app.js"></script>
 </body>
 </html>
