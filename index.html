@@ -1,56 +1,38 @@
 <!DOCTYPE html>
-<<html lang="pt">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loja Online</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop-E - Loja Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
 
-  <header>
-    <h1> Loja </h1>
-  </header>
+    <header>
+        <div id="logo">
+            <i class="fa-solid fa-store"></i><b> Shop-E</b>
+        </div>
+    </header>
 
-  <button id="Voltar">Voltar</button>
+    <button id="Voltar">Voltar</button>
 
-  <main>
+    <main>
+        <div class="cardLista">
+            <h3>Produtos Disponiveis</h3>
+            <ul id="lista-produtos"></ul>
+        </div>
 
-    <section class="card" id="secao-adicionar">
-      <h2>Adicionar Produto</h2>
+        <div class="cardLista">
+            <h3>Carrinho de Compras</h3>
+            <ul id="lista-carrinho"></ul>
+            <hr>
+            <p>Quantidade: <span id="totalItens">0</span></p>
+            <p>Total: <span id="totalPreco">0.00 MZN</span></p>
+            <button id="btnEncerrar"> Encerrar Compra </button>
+        </div>
+    </main>
 
-      <div class="form-grupo">
-        <label for="input-nome">Nome do Produto</label>
-        <input type="text" id="input-nome" placeholder="Ex: Camiseta">
-      </div>
-      <div class="form-grupo">
-        <label for="input-preco">Preço (MT)</label>
-        <input type="number" id="input-preco" placeholder="Ex: 500">
-      </div>
-      <p id="erro-produto" class="erro"></p>
-      <button id="botao-adicionar-produto">Adicionar Produto</button>
-    </section>
-
-    <section class="card" id="secao-produtos">
-      <h2>Produtos Disponíveis</h2>
-      <ul id="lista-produtos">
-      </ul>
-    </section>
-
-    <section class="card" id="secao-carrinho">
-      <h2>Carrinho de Compras</h2>
-      <ul id="lista-carrinho">
-      </ul>
-      <div id="resumo-carrinho">
-        <p>Quantidade de produtos: <strong id="total-itens">0</strong></p>
-        <p>Total a pagar: <strong id="total-preco">0 MT</strong></p>
-      </div>
-      <button onclick="Controller.encerrarCompra()">Encerrar Compra</button>
-      <!-- <button id="botao-encerrar" class="botao-encerrar">Encerrar Compra</button> -->
-    </section>
-
-  </main>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
