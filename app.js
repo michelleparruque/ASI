@@ -60,10 +60,10 @@ function visualizarListaProdutos() {
     let span = document.createElement("span");
     span.textContent = produto.nome + " — " + produto.preco + " MT";
 
-    let btn = document.createElement("button");
-    btn.textContent = "Adicionar ao Carrinho";
-    btn.setAttribute("data-id", produto.id);
-    btn.addEventListener("click", function() {
+    let botao = document.createElement("button");
+    botao.textContent = "Adicionar ao Carrinho";
+    botao.setAttribute("data-id", produto.id);
+    botao.addEventListener("click", function() {
       controladorAdicionarAoCarrinho(produto.id);
     });
 
